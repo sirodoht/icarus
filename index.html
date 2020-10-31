@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="description" content="Informational website on sunshine and rainy days per year.">
+        <meta name="keywords" content="mastodon, instances, servers, list">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Curated Mastodon instances list</title>
+
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <header>
+            <h1>Mastodon Instances</h1>
+            <p>A List of.</p>
+            <p>
+                Add or remove? Contact <a href="https://ontological.city/@zermelo">zermelo@ontological.city</a>
+            </p>
+        </header>
+
+        <main class="table" id="data-table">
+            <div class="table-header">
+                <div class="table-header-item">Name</div>
+                <div class="table-header-item">Users</div>
+                <div class="table-header-item">Active users</div>
+                <div class="table-header-item">Statuses</div>
+                <div class="table-header-item">Short description</div>
+            </div>
+
+            <!--
+            <div class="table-row">
+                <div class="table-row-item"></div>
+                <div class="table-row-item"></div>
+                <div class="table-row-item"></div>
+                <div class="table-row-item"></div>
+                <div class="table-row-item"></div>
+            </div>
+            -->
+
+        </main>
+
+        <script>
+            function renderRow(rowData) {
+                var dataTable = document.getElementById('data-table');
+
+                // build row element
+                var rowElem = document.createElement('div');
+                rowElem.classList.add('table-row');
+
+                var nameElem = document.createElement('div');
+                nameElem.classList.add('table-row-item');
+                var anchorNameElem = document.createElement('a');
+                anchorNameElem.href = "http://" + rowData.name;
+                anchorNameElem.appendChild(document.createTextNode(rowData.name));
+                nameElem.appendChild(anchorNameElem);
+                rowElem.appendChild(nameElem);
+
+                var usersElem = document.createElement('div');
+                usersElem.classList.add('table-row-item');
+                var formattedUsers = parseInt(rowData.users).toLocaleString('en-US');
+                usersElem.appendChild(document.createTextNode(formattedUsers));
+                rowElem.appendChild(usersElem);
+
+                var activesElem = document.createElement('div');
+                activesElem.classList.add('table-row-item');
+                var formattedActives = parseInt(rowData.active_users).toLocaleString('en-US');
+                activesElem.appendChild(document.createTextNode(formattedActives));
+                rowElem.appendChild(activesElem);
+
+                var statusesElem = document.createElement('div');
+                statusesElem.classList.add('table-row-item');
+                var formattedStatuses = parseInt(rowData.statuses).toLocaleString('en-US');
+                statusesElem.appendChild(document.createTextNode(formattedStatuses));
+                rowElem.appendChild(statusesElem);
+
+                var descElem = document.createElement('div');
+                descElem.classList.add('table-row-item');
+                descElem.appendChild(document.createTextNode(rowData.short_desc));
+                rowElem.appendChild(descElem);
+
+                // append row in table
+                dataTable.appendChild(rowElem);
+            }
+
+            function renderTable(data) {
+                data.forEach(renderRow);
+            }
+
+            function handleResponse() {
+                if (this.readyState === XMLHttpRequest.DONE) {
+                    if (this.status === 200) {
+                        var jsonResponse = JSON.parse(this.responseText);
+                        renderTable(jsonResponse);
+                    } else {
+                        alert('failed to load instances data');
+                    }
+                }
+            }
+
+            function requestInstancesData() {
+                var req = new XMLHttpRequest();
+                req.addEventListener('readystatechange', handleResponse);
+                req.open('GET', '/instances-sorted-pretty-summary-onlyup.json');
+                req.send();
+            }
+
+            (function () {
+                requestInstancesData();
+            })();
+        </script>
+    </body>
+</html>
