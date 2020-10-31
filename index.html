@@ -42,6 +42,14 @@
         </main>
 
         <script>
+            function formatNumber(intStr) {
+                var parsed = parseInt(intStr);
+                if (isNaN(parsed)) {
+                    return 'null';
+                }
+                return parsed.toLocaleString('en-US');
+            }
+
             function renderRow(rowData) {
                 var dataTable = document.getElementById('data-table');
 
@@ -59,20 +67,17 @@
 
                 var usersElem = document.createElement('div');
                 usersElem.classList.add('table-row-item');
-                var formattedUsers = parseInt(rowData.users).toLocaleString('en-US');
-                usersElem.appendChild(document.createTextNode(formattedUsers));
+                usersElem.appendChild(document.createTextNode(formatNumber(rowData.users)));
                 rowElem.appendChild(usersElem);
 
                 var activesElem = document.createElement('div');
                 activesElem.classList.add('table-row-item');
-                var formattedActives = parseInt(rowData.active_users).toLocaleString('en-US');
-                activesElem.appendChild(document.createTextNode(formattedActives));
+                activesElem.appendChild(document.createTextNode(formatNumber(rowData.active_users)));
                 rowElem.appendChild(activesElem);
 
                 var statusesElem = document.createElement('div');
                 statusesElem.classList.add('table-row-item');
-                var formattedStatuses = parseInt(rowData.statuses).toLocaleString('en-US');
-                statusesElem.appendChild(document.createTextNode(formattedStatuses));
+                statusesElem.appendChild(document.createTextNode(formatNumber(rowData.statuses)));
                 rowElem.appendChild(statusesElem);
 
                 var descElem = document.createElement('div');
