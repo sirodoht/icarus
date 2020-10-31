@@ -1,5 +1,11 @@
 # icarus
 
+A list of Mastodon instances.
+
+Initial data from [instances.social](https://instances.social/) API.
+
+## Data processing
+
 ```sh
 curl -H 'Authorization: Bearer xxx' 'https://instances.social/api/1.0/instances/list?count=0&sort_by=active_users&sort_order=desc'  > instances-sorted.json
 cat instances-sorted.json | jq '.' > instances-sorted-pretty.json
