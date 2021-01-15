@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="description" content="Informational website on sunshine and rainy days per year.">
+        <meta name="description" content="Index of various Mastodon instances.">
         <meta name="keywords" content="mastodon, instances, servers, list">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -88,7 +88,7 @@
                 // append row in table
                 dataTable.appendChild(rowElem);
             }
-
+            
             function renderTable(data) {
                 data.forEach(renderRow);
             }
@@ -107,7 +107,7 @@
             function requestInstancesData() {
                 var req = new XMLHttpRequest();
                 req.addEventListener('readystatechange', handleResponse);
-                req.open('GET', '/instances-sorted-pretty-summary-onlyup.json');
+                req.open('GET', '/instances-living-list.json');
                 req.send();
             }
 
