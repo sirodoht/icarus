@@ -2926,6 +2926,13 @@
     "short_desc": null
   },
   {
+    "name": "9kb.me",
+    "users": "22",
+    "active_users": 15,
+    "statuses": null,
+    "short_desc": "一个自由、开放、多元、包容的中文 Mastodon 社区。Mastodon 是一个建立在开放式网络协议和自由、开源软件之上的社交网络，有着类似于电子邮件的分布式设计。"
+  },
+  {
     "name": "mastodon.z27.ch",
     "users": "22",
     "active_users": 10,
